@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- HEAD -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Holberton AirBnB</title>
+
+    <!-- FAVICON -->
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}">
+
+    <!-- **********************
+	 CSS styles
+	 ********************** -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') }}?{{ cache_id }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/8-places.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/font-awesome.css') }}?{{ cache_id }}">
+
+    <!-- **********************
+	 Javascript 
+	 ********************** -->
+
+	<SCRIPT src="https://code.jquery.com/jquery-3.2.1.min.js"></SCRIPT>
+	<SCRIPT type="text/javascript" src="/static/scripts/101-hbnb.js"></SCRIPT>
+
+  </head>
+  <!-- **********************
+       BODY
+       ********************** -->
+
+  <body>
+
+    <!-- **********************
+	 HEADER
+	 ********************** -->
+
+    <header>
+      <DIV id="api_status"> </div>
+    </header>
+    <main>
+      <div class="container">
+
+	<!-- **********************
+	     FILTERS
+	     ********************** -->
+
+	<section class="filters">
+
+	  <!-- **********************
+	       LOCATIONS
+	       ********************** -->
+
+	  <div class="locations">
+	    <h3>States</h3>
+		<h4>&nbsp;</h4>
+	    <ul class="popover">
+	      {% for stateTup in states|dictsort %}
+	      <LI>
+		<h2><INPUT type="checkbox"
+		data-id="{{ stateTup[1].id }}" data-name="{{ stateTup[1].name }}">
+		{{ stateTup[0] }} </h2>
+</LI>
+
+	      <UL>
+		{% for city in stateTup[1].cities|sort(attribute='name') %}
+
+		<LI>
+		  <INPUT type="checkbox"
+		  data-id="{{ city.id }}" data-name="{{ city.name }}">
+		  {{ city.name }}</LI>
+		{% endfor %}
+	      </UL>
+	      {% endfor %}
+	    </ul>
+	  </div>
+
+	  <!-- **********************
+	       AMENITIES
+	       ********************** -->
+
+	  <div class="amenities">
+	    <h3>Amenities</h3>
+		<h4 class="truncate">&nbsp;</h4>
+	    <ul class="popover">
+	      {% for amenity in amens|sort(attribute='name') %}
+	      <LI>
+			  <INPUT type="checkbox"
+					 data-id="{{ amenity.id }}" data-name="{{ amenity.name }}">
+			  {{ amenity.name }}
+		  </LI>
+	      {% endfor %}
+	    </ul>
+	  </div>
+
+	  <!-- **********************
+	       SEARCH BUTTON
+	       ********************** -->
+
+	  <button>Search</button>
+	</section>
+
+	<section class="places">
+	  <h1>Places</h1>
+	</section>
+      	<!-- ********************
+	     REVIEWS
+	     ******************** -->
+
+	<div class="reviews">
+	  <h2> Reviews </h2>
+	  <ul>
+	    <li>
+	      <h3> From Shoji and Angie </h3>
+	      <p>There was blood everywhere </p>
+	    </li>
+	  </ul>
+	</div>
+      </div>
+    </main>
+
+   <!-- FOOTER -->
+
+    <footer>
+      Holberton School
+    </footer>
+  </body>
+</html>
